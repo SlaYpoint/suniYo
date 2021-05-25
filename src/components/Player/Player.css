@@ -1,24 +1,78 @@
 .player__container{
     min-height: 20vh;
     display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+    padding: 0 1rem 0 1rem;
+    box-shadow: 0px 0px 20px 0px #e3dddd;
+    border-top-right-radius: 5rem;
+}
+
+.track__img-container{
+    position: relative;
+    display: flex;
+    width: 12rem;
+    height: 12rem;
+    padding: 1rem;
+}
+
+.track__img-container >img{
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: -5rem;
+    animation: rotate 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.track__container{
+    width: 100%;
+    margin-left: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content :space-between;
+    padding-right: 20rem;
+    overflow: hidden;
+}
+
+.track__info{
+    overflow: hidden;
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.track__title{
+    font-size: 1.8em;
+}
+
+.track__artist{
+    font-size: 1.4em;
+}
+
+.player{
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    width: 80%;
 }
 
-.track__progress{
-    margin-top: 5rem;
-    width: 50%;
+.player__track{
+    width: 100%;
     display: flex;
     align-items: center;
 }
 
-.track__progress > p{
+.player__track > p{
     padding: 0 1rem 0 1rem;
     user-select: none;
 }
 
-.track{
+.audio{
     width: 100%;
     height: 1rem;
     position: relative;
@@ -26,21 +80,21 @@
     overflow: hidden;
 }
 
-.track > input{
+.audio > input{
     width: 100%;
     background: transparent;
     cursor: pointer;
     border:none;
 }
 
-.track > input::-moz-range-thumb, ::-webkit-slider-thumb{
+.audio > input::-moz-range-thumb, ::-webkit-slider-thumb{
     -webkit-appearance: none;
     -moz-appearance: none;
     background: transparent;
     border: none;
 }
 
-.track__progress-bar{
+.audio__progress-bar{
     background: rgb(204, 204, 204);;
     height: 100%;
     width: 100%;
@@ -55,7 +109,7 @@
    justify-content: space-between;
    align-items: center;
    padding: 1rem;
-   width:25%;
+   width:50%;
 }
 
 .player__controls > button{
@@ -66,4 +120,13 @@
 
 .player__controls > button > svg{
     font-size: 2rem;
+}
+
+@keyframes rotate{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
 }
