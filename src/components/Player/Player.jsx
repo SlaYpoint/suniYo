@@ -7,11 +7,11 @@ const Player = ({
     isPlaying,
     setIsPlaying,
     currentTrack,
-    //eslint-disable-next-line
     setCurrentTrack,
     audioRef,
     trackInfo,
-    setTrackInfo
+    setTrackInfo,
+    tracks
 }) => {
 
     const playHandler = () => {
@@ -35,6 +35,23 @@ const Player = ({
       setTrackInfo({ ...trackInfo, currentTime: e.target.value });
     }
 
+    const skipHandler = async (dir) => {
+      let currentIndex = tracks.findIndex((track) => track.id === currentTrack.id);
+      if (dir === "forward") {
+        await setCurrentTrack(tracks[(currentIndex + 1) % tracks.length]);
+      } else if (dir === "backward") {
+        if ((currentIndex - 1) % tracks.length === -1) {
+          await setCurrentTrack(tracks[tracks.length - 1]);
+        } else {
+          await setCurrentTrack(tracks[(currentIndex - 1) % tracks.length]);
+        }
+      }
+
+      if (isPlaying) {
+        audioRef.current.play();
+      }
+    }
+    
     return (
       <div className="player__container">
         {/* <div className="audio__img-container">
@@ -44,22 +61,39 @@ const Player = ({
           <p>{getTime(trackInfo.currentTime || 0)}</p>
           <div
             className="track"
-            style={{background : `linear-gradient(to right, ${currentTrack.color[0]}, ${currentTrack.color[1]})`}}
+            style={{
+              background: `linear-gradient(to right, ${currentTrack.color[0]}, ${currentTrack.color[1]})`,
+            }}
           >
-            <input type="range" onChange={dragHandler} min={0} max={trackInfo.duration} value={trackInfo.currentTime}/>
-            <div className="track__progress-bar" style={{transform : `translateX(${Math.round((trackInfo.currentTime*100)/ trackInfo.duration)+"%"})`}}></div>
+            <input
+              type="range"
+              onChange={dragHandler}
+              min={0}
+              max={trackInfo.duration}
+              value={trackInfo.currentTime}
+            />
+            <div
+              className="track__progress-bar"
+              style={{
+                transform: `translateX(${
+                  Math.round(
+                    (trackInfo.currentTime * 100) / trackInfo.duration
+                  ) + "%"
+                })`,
+              }}
+            ></div>
           </div>
           <p>{getTime(trackInfo.duration || 0)}</p>
         </div>
 
         <div class="player__controls">
-          <button>
+          <button onClick={() => skipHandler("backward")}>
             <FaAngleLeft />
           </button>
           <button onClick={playHandler}>
-            {isPlaying ? <FaPause/> : <FaPlay/>}
+            {isPlaying ? <FaPause /> : <FaPlay />}
           </button>
-          <button>
+          <button onClick={() => skipHandler("forward")}>
             <FaAngleRight />
           </button>
         </div>
