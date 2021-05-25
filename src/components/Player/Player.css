@@ -23,7 +23,7 @@
     height: 1rem;
     position: relative;
     border-radius: 1rem;
-    background: linear-gradient(to right, red);
+    overflow: hidden;
 }
 
 .track > input{
@@ -36,9 +36,8 @@
 .track > input::-moz-range-thumb, ::-webkit-slider-thumb{
     -webkit-appearance: none;
     -moz-appearance: none;
+    background: transparent;
     border: none;
-    height: 0.9rem;
-    width: 1rem;
 }
 
 .track__progress-bar{
