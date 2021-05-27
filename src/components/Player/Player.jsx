@@ -98,7 +98,7 @@ const Player = ({
               <p>{getTime(trackInfo.duration || 0)}</p>
             </div>
 
-            <div class="player__controls">
+            <div className="player__controls">
               <button onClick={() => skipHandler("backward")}>
                 <FaAngleLeft />
               </button>
