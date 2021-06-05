@@ -1,6 +1,6 @@
 import React from "react";
 import "./Player.css";
-//eslint-disable-next-line
+
 import { FaPlay, FaPause, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Player = ({
@@ -56,8 +56,8 @@ const Player = ({
       <div className="player__container">
         <div className="track__img-container">
           <img
-            src={currentTrack.cover}
-            alt={currentTrack.name}
+            src={currentTrack.album.cover}
+            alt={currentTrack.title_short}
             className="track-img"
             style={{ animationPlayState: isPlaying ? 'running' : 'paused'}}
           /> 
@@ -65,8 +65,8 @@ const Player = ({
 
         <div className="track__container">
           <div className="track__info">
-            <div className="track__title">{currentTrack.name}</div>
-            <div className="track__artist">{currentTrack.artist}</div>
+            <div className="track__title">{currentTrack.title}</div>
+            <div className="track__artist">{currentTrack.artist.name}</div>
           </div>
           <div className="player">
             <div className="player__track">
@@ -74,7 +74,7 @@ const Player = ({
               <div
                 className="audio"
                 style={{
-                  background: `linear-gradient(to right, ${currentTrack.color[0]}, ${currentTrack.color[1]})`,
+                  background: `linear-gradient(to right, #000, #000)`,
                 }}
               >
                 <input
