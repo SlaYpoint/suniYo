@@ -65,7 +65,7 @@ const Player = ({
 
         <div className="track__container">
           <div className="track__info">
-            <div className="track__title">{currentTrack.title}</div>
+            <div className="track__title">{currentTrack.title_short}</div>
             <div className="track__artist">{currentTrack.artist.name}</div>
           </div>
           <div className="player">
@@ -81,7 +81,7 @@ const Player = ({
                   type="range"
                   onChange={dragHandler}
                   min={0}
-                  max={trackInfo.duration}
+                  max={trackInfo.duration||0}
                   value={trackInfo.currentTime}
                 />
                 <div
