@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 
+import data from "./data";
 import Player from "./components/Player/Player";
 import Header from "./components/Header/Header";
-
+import Preloader from "./components/Preloader/Preloader";
 import { getPlaylist } from './utils/makeAxiosCalls';
 
 
 function App() {
   const audioRef = useRef(null);
-  //eslint-disable-next-line
+
   const [loading, setLoading] = useState(false);
   const [tracks, setTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState({});
@@ -18,24 +19,30 @@ function App() {
     currentTime: 0,
     duration: 0,
   });
-
-  const fetchDefaultTracks = () => {
-    setLoading(true);
-    try {
-      const newTracks = getPlaylist();
-      newTracks.then((data) => setTracks(data));
-      setLoading(false);
-      // console.log(tracks);
-      setCurrentTrack(tracks[0]);
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-    }
-  }
-
+  
   useEffect(() => {
-    fetchDefaultTracks();
-  }, []);
+    const fetchDefaultTracks = () => {
+      setLoading(true);
+      try {
+        getPlaylist()
+          .then(data => {
+            let newTracks = data.slice(0, 10).map((obj) => obj);
+            if (newTracks.length !== 0) {
+              setTracks(newTracks);
+              setLoading(false);
+              setCurrentTrack(newTracks[0]);
+            }
+          })
+          .catch(e => console.log(e));
+      } catch(e) {
+        setTracks(data);
+        setLoading(false);
+        setCurrentTrack(data[0]);
+        console.log(e);
+      }
+    }
+    fetchDefaultTracks()
+  },[]);
 
   const timeUpdateHandler = (e) => {
     const currentTime = e.target.currentTime;
@@ -55,27 +62,35 @@ function App() {
     }
   };
 
+  if (!loading) {
+    return (
+      <main className="App">
+        <Header />
+        <Player
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          currentTrack={currentTrack}
+          setCurrentTrack={setCurrentTrack}
+          audioRef={audioRef}
+          trackInfo={trackInfo}
+          setTrackInfo={setTrackInfo}
+          tracks={tracks}
+        />
+        <audio
+          onLoadedMetadata={timeUpdateHandler}
+          onEnded={trackHandler}
+          onTimeUpdate={timeUpdateHandler}
+          ref={audioRef}
+          src={currentTrack.preview}
+        />
+      </main>
+    );
+  }
   return (
-    <div className="App">
-      <Header />
-      <Player
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        currentTrack={currentTrack}
-        setCurrentTrack={setCurrentTrack}
-        audioRef={audioRef}
-        trackInfo={trackInfo}
-        setTrackInfo={setTrackInfo}
-        tracks={tracks}
-      />
-      <audio
-        onLoadedMetadata={timeUpdateHandler}
-        onEnded={trackHandler}
-        onTimeUpdate={timeUpdateHandler}
-        ref={audioRef}
-        src={currentTrack.preview}
-      />
-    </div>
+    <main className="App">
+        <Header />
+        <Preloader/>
+    </main>
   );
 }
 
