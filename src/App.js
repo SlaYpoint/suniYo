@@ -12,8 +12,8 @@ function App() {
   const audioRef = useRef(null);
 
   const [loading, setLoading] = useState(false);
-  const [tracks, setTracks] = useState([]);
-  const [currentTrack, setCurrentTrack] = useState({});
+  const [tracks, setTracks] = useState(data);
+  const [currentTrack, setCurrentTrack] = useState(data[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackInfo, setTrackInfo] = useState({
     currentTime: 0,
@@ -23,23 +23,21 @@ function App() {
   useEffect(() => {
     const fetchDefaultTracks = () => {
       setLoading(true);
-      try {
-        getPlaylist()
-          .then(data => {
-            let newTracks = data.slice(0, 10).map((obj) => obj);
-            if (newTracks.length !== 0) {
-              setTracks(newTracks);
-              setLoading(false);
-              setCurrentTrack(newTracks[0]);
-            }
-          })
-          .catch(e => console.log(e));
-      } catch(e) {
-        setTracks(data);
-        setLoading(false);
-        setCurrentTrack(data[0]);
-        console.log(e);
-      }
+      
+      getPlaylist()
+        .then(data => {
+          let newTracks = data.slice(0, 10).map((obj) => obj);
+          if (newTracks.length !== 0) {
+            setTracks(newTracks);
+            setLoading(false);
+            setCurrentTrack(newTracks[0]);
+          }
+        })
+        .catch(e => {
+          setLoading(false);
+          console.log(e)
+        });
+      
     }
     fetchDefaultTracks()
   },[]);
