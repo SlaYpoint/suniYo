@@ -1,6 +1,7 @@
 import React from "react";
 import "./Player.css";
 
+import limitTitle from "../../helpers/limitTitle";
 import { FaPlay, FaPause, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Player = ({
@@ -57,7 +58,7 @@ const Player = ({
         <div className="player_track__img-container">
           <img
             src={currentTrack.album.cover}
-            alt={currentTrack.title_short}
+            alt={limitTitle(currentTrack.title_short)}
             className="player_track-img"
             style={{ animationPlayState: isPlaying ? 'running' : 'paused'}}
           /> 
@@ -65,7 +66,7 @@ const Player = ({
 
         <div className="player_track__container">
           <div className="player_track__info">
-            <div className="player_track__title">{currentTrack.title_short}</div>
+            <div className="player_track__title">{limitTitle(currentTrack.title_short)}</div>
             <div className="player_track__artist">{currentTrack.artist.name}</div>
           </div>
           <div className="player">
