@@ -54,25 +54,25 @@ const Player = ({
     
     return (
       <div className="player__container">
-        <div className="track__img-container">
+        <div className="player_track__img-container">
           <img
             src={currentTrack.album.cover}
             alt={currentTrack.title_short}
-            className="track-img"
+            className="player_track-img"
             style={{ animationPlayState: isPlaying ? 'running' : 'paused'}}
           /> 
         </div>
 
-        <div className="track__container">
-          <div className="track__info">
-            <div className="track__title">{currentTrack.title_short}</div>
-            <div className="track__artist">{currentTrack.artist.name}</div>
+        <div className="player_track__container">
+          <div className="player_track__info">
+            <div className="player_track__title">{currentTrack.title_short}</div>
+            <div className="player_track__artist">{currentTrack.artist.name}</div>
           </div>
           <div className="player">
             <div className="player__track">
               <p>{getTime(trackInfo.currentTime || 0)}</p>
               <div
-                className="audio"
+                className="player_audio"
                 style={{
                   background: `linear-gradient(to right, #000, #000)`,
                 }}
@@ -85,7 +85,7 @@ const Player = ({
                   value={trackInfo.currentTime}
                 />
                 <div
-                  className="audio__progress-bar"
+                  className="player_audio__progress-bar"
                   style={{
                     transform: `translateX(${
                       Math.round(
