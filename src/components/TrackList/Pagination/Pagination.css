@@ -1,0 +1,21 @@
+.pagination{
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination__btn{
+    display: flex;
+    align-items: center;
+    background: linear-gradient(
+        to left,
+        var(--color-primary-dark),
+        var(--color-secondary-dark)
+    );
+    border: none;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+}

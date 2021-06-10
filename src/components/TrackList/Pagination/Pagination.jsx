@@ -1,12 +1,12 @@
 import React from "react";
+import "./Pagination.css";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 
 const Pagination = ({ page, postsPerPage, totalPosts, paginate}) => {
-    // const pageNumbers = [];
 
     const pages = Math.ceil(totalPosts / postsPerPage);
-
+  // console.log(page);
     // for (let i = 0; i <= Math.ceil(totalPosts / postsPerPage); i++){
     //     pageNumbers.push(i);
     // }
@@ -28,46 +28,50 @@ const Pagination = ({ page, postsPerPage, totalPosts, paginate}) => {
 
     if (page === 1 && pages > 1) {
         return (
-            <nav>
+            <nav className="pagination">
                 <button onClick={() => paginate(page+1)} className="pagination__btn">
-                    <span>Page {page + 1}</span>
+                    <span>{page + 1}</span>
                     <FaAngleRight />
                 </button>
             </nav>
         );
     } else if (page < pages) {
         return (
-          <nav>
+          <nav className="pagination">
             <button
               onClick={() => paginate(page - 1)}
               className="pagination__btn"
             >
-              <span>Page {page - 1}</span>
               <FaAngleLeft />
+              <span>{page - 1}</span>
             </button>
-                
+
             <button
               onClick={() => paginate(page + 1)}
               className="pagination__btn"
             >
-              <span>Page {page + 1}</span>
+              <span>{page + 1}</span>
               <FaAngleRight />
             </button>
           </nav>
         );
     } else if (page === pages && pages > 1) {
         return (
-          <nav>
+          <nav className="pagination">
             <button
               onClick={() => paginate(page - 1)}
               className="pagination__btn"
             >
-              <span>Page {page - 1}</span>
               <FaAngleLeft />
+              <span>{page - 1}</span>
             </button>
           </nav>
         );
     }
+  return (
+    <>
+    </>
+  );
 }
 
 export default Pagination;
