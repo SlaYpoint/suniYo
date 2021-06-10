@@ -1,5 +1,4 @@
 import React from "react";
-import "./Track.css";
 
 const Track = ({ track, setCurrentTrack, isPlaying, audioRef}) => {
     
@@ -12,7 +11,7 @@ const Track = ({ track, setCurrentTrack, isPlaying, audioRef}) => {
     }
 
     return (
-        <li key={track.id} onClick={trackSelectHandler}>
+        <li className="track" key={track.id} onClick={trackSelectHandler}>
             <figure className="track__cover">
                 <img src={track.album.cover_small} alt={track.title_short}/>
             </figure>
