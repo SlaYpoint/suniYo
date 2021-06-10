@@ -1,0 +1,53 @@
+.track__container{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 25%;
+    position: relative;
+    padding-top: 1rem;
+    background: #fff;
+}
+
+.track__list{
+    list-style: none;
+    overflow: auto;
+    padding-inline-start: 0;
+}
+
+.track{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    margin: 0.5rem 1rem;
+    background:var(--bg-color-light);
+}
+
+.track:hover{
+    background: var(--bg-color-dark);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.track__cover{
+ height: 5rem;
+ width: 5rem;
+}
+
+.track__cover > img{
+    width: 100%;
+    border-radius: 2px;
+}
+
+.track__details{
+    margin-left: 2rem;
+}
+
+.track__title{
+    color:var(--color-secondary-dark);
+    font-size: 1.3rem;
+}
+
+.track__artist{
+    color: var(--color-grey-dark);
+    font-size: 1.2rem;
+}
