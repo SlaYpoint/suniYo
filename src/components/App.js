@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 
-import data from "../data";
+import data from "../helpers/data";
 import Player from "./Player/Player";
 import TrackList from "./TrackList/TrackList";
 import Header from "./Header/Header";
@@ -27,7 +27,7 @@ function App() {
       
       getPlaylist()
         .then(data => {
-          let newTracks = data.slice(0, 10).map((obj) => obj);
+          let newTracks = data.slice(0, 25).map((obj) => obj);
           if (newTracks.length !== 0) {
             setTracks(newTracks);
             setLoading(false);
