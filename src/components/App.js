@@ -6,7 +6,7 @@ import Player from "./Player/Player";
 import TrackList from "./TrackList/TrackList";
 import Header from "./Header/Header";
 import Preloader from "./Preloader/Preloader";
-import { getPlaylist } from '../utils/makeAxiosCalls';
+import { getPlaylist, getTrack } from '../utils/makeAxiosCalls';
 
 
 function App() {
@@ -61,10 +61,24 @@ function App() {
     }
   };
 
+  
+  const searchSubmitHandler = (e, query) => {
+    e.preventDefault();
+    if (query !== ' '|| query !== null) {
+      getTrack(query)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    } else {
+      console.log("no input");
+    }
+  }
+
   if (!loading) {
     return (
       <div className="container">
-        <Header />
+        <Header
+          searchSubmitHandler={searchSubmitHandler}
+        />
         <main>
           <TrackList
             tracks={tracks}
