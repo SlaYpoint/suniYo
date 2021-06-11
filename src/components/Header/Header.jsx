@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import { FaSearch, FaHeart } from "react-icons/fa";
 
 import "./Header.css";
 
 const Header = ({searchSubmitHandler, searchChangeHandler}) => {
-    
+    const [value, setValue] = useState('');
+
     return (
         <header className="header">
             <img src="" alt="Logo" className="header-logo"/>
 
-            <form className="search" onSubmit={()=>searchSubmitHandler()}>
-                <input type="text" className="search__input" onChange={() => searchChangeHandler()}/>
-                <button className="btn search__btn" onClick={() => searchSubmitHandler()}>
+            <form className="search" onSubmit={(e)=> searchSubmitHandler(e,value)}>
+                <input type="text" className="search__input" value={value} onChange={(e) => setValue(e.target.value)}/>
+                <button className="btn search__btn" onClick={(e)=> searchSubmitHandler(e,value)}>
                     <FaSearch/>
                 </button>
             </form>
