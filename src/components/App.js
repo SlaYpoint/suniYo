@@ -5,8 +5,7 @@ import data from "../helpers/data";
 import Player from "./Player/Player";
 import TrackList from "./TrackList/TrackList";
 import Header from "./Header/Header";
-import Preloader from "./Preloader/Preloader";
-import { getPlaylist, getTrack } from '../utils/makeAxiosCalls';
+import { getPlaylist, getResults } from '../utils/makeAxiosCalls';
 
 
 function App() {
@@ -43,11 +42,13 @@ function App() {
     fetchDefaultTracks()
   },[]);
 
+
   const timeUpdateHandler = (e) => {
     const currentTime = e.target.currentTime;
     const duration = e.target.duration;
     setTrackInfo({ ...trackInfo, currentTime, duration });
   };
+
 
   const trackHandler = async () => {
     const currentIndex = tracks.findIndex(
@@ -62,57 +63,64 @@ function App() {
   };
 
   
-  const searchSubmitHandler = (e, query) => {
-    e.preventDefault();
-    if (query !== ' '|| query !== null) {
-      getTrack(query)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+  const searchSubmitHandler = (event, query) => {
+    event.preventDefault();
+
+    setLoading(true);
+    if (query !== ' ' && query !== null && typeof(query) !== undefined) {
+      getResults(query)
+        .then(data => {
+          let result = data.map((val) => val);
+          if (result.length !== 0) {
+            setTracks(result);
+            setLoading(false);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          setLoading(false);
+
+        });
     } else {
       console.log("no input");
     }
   }
 
-  if (!loading) {
-    return (
-      <div className="container">
-        <Header
-          searchSubmitHandler={searchSubmitHandler}
-        />
-        <main>
-          <TrackList
-            tracks={tracks}
-            setCurrentTrack={setCurrentTrack}
-            audioRef={audioRef}
-            isPlaying={isPlaying}
-          />
-          <Player
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-            currentTrack={currentTrack}
-            setCurrentTrack={setCurrentTrack}
-            audioRef={audioRef}
-            trackInfo={trackInfo}
-            setTrackInfo={setTrackInfo}
-            tracks={tracks}
-          />
-          <audio
-            onLoadedMetadata={timeUpdateHandler}
-            onEnded={trackHandler}
-            onTimeUpdate={timeUpdateHandler}
-            ref={audioRef}
-            src={currentTrack.preview}
-          />
-        </main>
-      </div>
-    );
-  }
+  
   return (
     <div className="container">
-        <Header />
-        <Preloader/>
+      <Header
+        searchSubmitHandler={searchSubmitHandler}
+      />
+      <main>
+        <TrackList
+          loading={loading}
+          tracks={tracks}
+          setCurrentTrack={setCurrentTrack}
+          audioRef={audioRef}
+          isPlaying={isPlaying}
+        />
+        <Player
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          currentTrack={currentTrack}
+          setCurrentTrack={setCurrentTrack}
+          audioRef={audioRef}
+          trackInfo={trackInfo}
+          setTrackInfo={setTrackInfo}
+          tracks={tracks}
+        />
+        <audio
+          onLoadedMetadata={timeUpdateHandler}
+          onEnded={trackHandler}
+          onTimeUpdate={timeUpdateHandler}
+          ref={audioRef}
+          src={currentTrack.preview}
+        />
+      </main>
     </div>
   );
+  
 }
 
 export default App;
