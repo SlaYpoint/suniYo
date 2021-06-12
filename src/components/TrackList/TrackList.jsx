@@ -21,6 +21,7 @@ const TrackList = ({loading, tracks, setCurrentTrack, audioRef, isPlaying}) => {
       </div>
     );
   }
+  
   return (
     <div className="track__container">
       <ul className="track__list">
