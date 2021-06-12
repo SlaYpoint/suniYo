@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "./TrackList.css";
 import Pagination from "./Pagination/Pagination";
 import Track from "./Track/Track";
+import Preloader from "../Preloader/Preloader";
 
-const TrackList = ({tracks, setCurrentTrack, audioRef, isPlaying}) => {
+const TrackList = ({loading, tracks, setCurrentTrack, audioRef, isPlaying}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [tracksPerPage] = useState(5);
 
@@ -13,6 +14,13 @@ const TrackList = ({tracks, setCurrentTrack, audioRef, isPlaying}) => {
     setCurrentPage(pageNum);
   };
 
+  if (loading) {
+    return (
+      <div className="tracks__container">
+        <Preloader />
+      </div>
+    );
+  }
   return (
     <div className="track__container">
       <ul className="track__list">
