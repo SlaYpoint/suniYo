@@ -16,7 +16,7 @@ const TrackList = ({loading, tracks, setCurrentTrack, audioRef, isPlaying}) => {
 
   if (loading) {
     return (
-      <div className="tracks__container">
+      <div className="track__container">
         <Preloader />
       </div>
     );
@@ -25,20 +25,31 @@ const TrackList = ({loading, tracks, setCurrentTrack, audioRef, isPlaying}) => {
   return (
     <div className="track__container">
       <ul className="track__list">
-        {tracks.slice(startIdx, endIdx).map((track) => (
-          <Track
-            track={track}
-            setCurrentTrack={setCurrentTrack}
-            isPlaying={isPlaying}
-            audioRef={audioRef}
-          />
-        ))}
+        {tracks.length === 0 ? (
+          <li className="error">
+            <h2 className="error__msg">
+              Oops! Looks like we dont have the song you are looking for 🙁
+              <br /> Please try another 😅
+            </h2>
+          </li>
+        ) : (
+          tracks
+            .slice(startIdx, endIdx)
+            .map((track) => (
+              <Track
+                track={track}
+                setCurrentTrack={setCurrentTrack}
+                isPlaying={isPlaying}
+                audioRef={audioRef}
+              />
+            ))
+        )}
       </ul>
       <Pagination
-          page={currentPage}
-          postsPerPage={tracksPerPage}
-          totalPosts={tracks.length}
-          paginate={paginate}
+        page={currentPage}
+        postsPerPage={tracksPerPage}
+        totalPosts={tracks.length}
+        paginate={paginate}
       />
     </div>
   );
