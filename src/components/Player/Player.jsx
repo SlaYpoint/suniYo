@@ -60,29 +60,28 @@ const Player = ({
             src={currentTrack.album.cover}
             alt={limitTitle(currentTrack.title_short)}
             className="player_track-img"
-            style={{ animationPlayState: isPlaying ? 'running' : 'paused'}}
-          /> 
+            style={{ animationPlayState: isPlaying ? "running" : "paused" }}
+          />
         </div>
 
         <div className="player_track__container">
           <div className="player_track__info">
-            <div className="player_track__title">{limitTitle(currentTrack.title_short)}</div>
-            <div className="player_track__artist">{currentTrack.artist.name}</div>
+            <div className="player_track__title">
+              {limitTitle(currentTrack.title_short)}
+            </div>
+            <div className="player_track__artist">
+              {currentTrack.artist.name}
+            </div>
           </div>
           <div className="player">
             <div className="player__track">
               <p>{getTime(trackInfo.currentTime || 0)}</p>
-              <div
-                className="player_audio"
-                style={{
-                  background: `linear-gradient(to right, #000, #000)`,
-                }}
-              >
+              <div className="player_audio">
                 <input
                   type="range"
                   onChange={dragHandler}
                   min={0}
-                  max={trackInfo.duration||0}
+                  max={trackInfo.duration || 0}
                   value={trackInfo.currentTime}
                 />
                 <div
@@ -100,13 +99,13 @@ const Player = ({
             </div>
 
             <div className="player__controls">
-              <button onClick={() => skipHandler("backward")}>
+              <button className="btn" onClick={() => skipHandler("backward")}>
                 <FaAngleLeft />
               </button>
-              <button onClick={playHandler}>
+              <button className="btn" onClick={playHandler}>
                 {isPlaying ? <FaPause /> : <FaPlay />}
               </button>
-              <button onClick={() => skipHandler("forward")}>
+              <button className="btn" onClick={() => skipHandler("forward")}>
                 <FaAngleRight />
               </button>
             </div>
