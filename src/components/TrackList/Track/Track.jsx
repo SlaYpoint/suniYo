@@ -1,5 +1,5 @@
 import React from "react";
-import limitTitle from "../../../helpers/limitTitle";
+import {limitTitle} from "../../../helpers/limitTitle";
 
 const Track = ({ track, setCurrentTrack, isPlaying, audioRef}) => {
     
