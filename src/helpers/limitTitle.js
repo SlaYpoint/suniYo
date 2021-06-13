@@ -13,4 +13,4 @@ const limitTitle = (title, limit = 15) => {
     return title;
 }
 
-export default limitTitle;
+export { limitTitle };
