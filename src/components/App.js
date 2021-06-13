@@ -5,6 +5,7 @@ import data from "../helpers/data";
 import Player from "./Player/Player";
 import TrackList from "./TrackList/TrackList";
 import Header from "./Header/Header";
+import Song from "./Song/Song";
 import { getPlaylist, getResults } from '../utils/makeAxiosCalls';
 
 
@@ -71,15 +72,12 @@ function App() {
       getResults(query)
         .then(data => {
           let result = data.map((val) => val);
-          if (result.length !== 0) {
-            setTracks(result);
-            setLoading(false);
-          }
+          setTracks(result);
+          setLoading(false);
         })
         .catch(err => {
           console.log(err);
           setLoading(false);
-
         });
     } else {
       console.log("no input");
@@ -89,9 +87,7 @@ function App() {
   
   return (
     <div className="container">
-      <Header
-        searchSubmitHandler={searchSubmitHandler}
-      />
+      <Header searchSubmitHandler={searchSubmitHandler} />
       <main>
         <TrackList
           loading={loading}
@@ -100,23 +96,35 @@ function App() {
           audioRef={audioRef}
           isPlaying={isPlaying}
         />
-        <Player
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-          currentTrack={currentTrack}
-          setCurrentTrack={setCurrentTrack}
-          audioRef={audioRef}
-          trackInfo={trackInfo}
-          setTrackInfo={setTrackInfo}
-          tracks={tracks}
-        />
-        <audio
-          onLoadedMetadata={timeUpdateHandler}
-          onEnded={trackHandler}
-          onTimeUpdate={timeUpdateHandler}
-          ref={audioRef}
-          src={currentTrack.preview}
-        />
+        <div className="music__container">
+          <div className="song__container">
+            <Song
+              currentTrack={currentTrack}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              audioRef={audioRef}
+            />
+          </div>
+          <div className="audio__container">
+            <Player
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              currentTrack={currentTrack}
+              setCurrentTrack={setCurrentTrack}
+              audioRef={audioRef}
+              trackInfo={trackInfo}
+              setTrackInfo={setTrackInfo}
+              tracks={tracks}
+            />
+            <audio
+              onLoadedMetadata={timeUpdateHandler}
+              onEnded={trackHandler}
+              onTimeUpdate={timeUpdateHandler}
+              ref={audioRef}
+              src={currentTrack.preview}
+            />
+          </div>
+        </div>
       </main>
     </div>
   );
