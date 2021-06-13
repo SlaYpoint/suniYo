@@ -1,0 +1,53 @@
+.song{
+    height: 100%;
+    padding: 1rem;
+}
+
+.song__card{
+    display: flex;
+}
+
+.song__details{
+    padding: 1rem;
+    color: var(--color-grey-dark);
+}
+
+.song__cover{
+    height : 20rem;
+    width: 20rem;
+}
+
+.song__cover >img{
+    width: 100%;
+    border-radius: 2px;
+}
+
+.song__title{
+    color: var(--color-primary-dark);
+    font-size: 2rem;
+}
+
+.song__artist{
+    font-size: 1rem;
+}
+
+.song__sub-details{
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid var(--bg-color-dark);
+    border-radius: 3rem;
+    color: var(--color-grey-dark);
+}
+
+.song__duration{
+    font-size: 1.5rem;
+}
+
+.song__btn{
+    padding: 0.5rem  0.8rem;
+    border-radius: 50%;
+}
