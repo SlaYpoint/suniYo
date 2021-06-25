@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Song.css";
 
 import { getTime } from "../../helpers/getTime";
 
 import { FaHeart, FaRegHeart, FaPlay, FaPause } from "react-icons/fa";
 
-const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef}) => {
-    const [liked, setLiked] = useState(false);
+const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef, liked, setLiked}) => {
     
     const playHandler = () => {
         if (isPlaying) {

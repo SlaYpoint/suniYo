@@ -6,6 +6,7 @@ import Player from "./Player/Player";
 import TrackList from "./TrackList/TrackList";
 import Header from "./Header/Header";
 import Song from "./Song/Song";
+
 import { getPlaylist, getResults } from '../utils/makeAxiosCalls';
 
 
@@ -13,7 +14,7 @@ function App() {
   const audioRef = useRef(null);
 
   const [loading, setLoading] = useState(false);
-  const [tracks, setTracks] = useState(data);
+  const [tracks, setTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState(data[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackInfo, setTrackInfo] = useState({
@@ -22,22 +23,18 @@ function App() {
   });
   
   useEffect(() => {
-    const fetchDefaultTracks = () => {
+    const fetchDefaultTracks = async () => {
+
       setLoading(true);
-      
-      getPlaylist()
-        .then(data => {
-          let newTracks = data.slice(0, 25).map((obj) => obj);
-          if (newTracks.length !== 0) {
-            setTracks(newTracks);
-            setLoading(false);
-            setCurrentTrack(newTracks[0]);
-          }
-        })
-        .catch(e => {
-          setLoading(false);
-          console.log(e)
-        });
+      try {
+        let playlist = await getPlaylist();
+        setTracks(playlist);
+        setLoading(false);
+        setCurrentTrack(playlist[0]);
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+      }
       
     }
     fetchDefaultTracks()
@@ -64,29 +61,28 @@ function App() {
   };
 
   
-  const searchSubmitHandler = (event, query) => {
+  const searchSubmitHandler = async (event, query) => {
     event.preventDefault();
 
     setLoading(true);
     if (query !== ' ' && query !== null && typeof(query) !== undefined) {
-      getResults(query)
-        .then(data => {
-          let result = data.map((val) => val);
-          setTracks(result);
-          setLoading(false);
-        })
-        .catch(err => {
-          console.log(err);
-          setLoading(false);
-        });
-    } else {
-      console.log("no input");
-    }
+      
+      try{
+        let result = await getResults(query);
+        setTracks(result);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
+      
+    } 
   }
 
-  
+  const [liked, setLiked] = useState(false);
+
   return (
-    <div className="container">
+    <>
       <Header searchSubmitHandler={searchSubmitHandler} />
       <main>
         <TrackList
@@ -96,13 +92,15 @@ function App() {
           audioRef={audioRef}
           isPlaying={isPlaying}
         />
-        <div className="music__container">
+        <section className="music__container">
           <div className="song__container">
             <Song
               currentTrack={currentTrack}
               isPlaying={isPlaying}
               setIsPlaying={setIsPlaying}
               audioRef={audioRef}
+              liked={liked}
+              setLiked={setLiked}
             />
           </div>
           <div className="audio__container">
@@ -124,9 +122,9 @@ function App() {
               src={currentTrack.preview}
             />
           </div>
-        </div>
+        </section>
       </main>
-    </div>
+    </>
   );
   
 }
