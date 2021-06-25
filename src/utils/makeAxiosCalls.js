@@ -4,62 +4,38 @@ export async function getResults(query) {
     const host = "deezerdevs-deezer.p.rapidapi.com";
     const key = process.env.REACT_APP_API_KEY;
 
-    try {
-        const res = await axios(
-            `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
-            {
-                method: 'GET',
-                headers: {
-                    'x-rapidapi-host': host,
-                    'x-rapidapi-key': key,
-                }
-            }
-        );
-        return res.data.data;
-    } catch(err) {
-        console.log(err);
-    }
-};
-
-export async function getTrack(id) {
-    const host = "deezerdevs-deezer.p.rapidapi.com";
-    const key = process.env.REACT_APP_API_KEY;
-
-    try {
-        const res = await axios(
-          `https://deezerdevs-deezer.p.rapidapi.com/track/${id}`,
-          {
+    const res = await axios(
+        `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
+        {
             method: 'GET',
             headers: {
-              'x-rapidapi-host': host,
-              'x-rapidapi-key': key,
-            },
-          }
-        );
-        return res.data;
-    } catch (err) {
-        console.log(err);
-    }
-}
+                'x-rapidapi-host': host,
+                'x-rapidapi-key': key,
+            }
+        }
+    );
+
+    if (res.status === 200) {
+        return res.data.data;
+    }   
+};
+
 
 export async function getPlaylist() {
     const host = "deezerdevs-deezer.p.rapidapi.com";
     const key = process.env.REACT_APP_API_KEY;
 
-    try {
-        const res = await axios(
-            'https://deezerdevs-deezer.p.rapidapi.com/playlist/1963962142',
-            {
-                method: 'GET',
-                headers: {
-                    'x-rapidapi-host': host,
-                    'x-rapidapi-key': key,
-                }
+    const res = await axios.get(
+        'https://deezerdevs-deezer.p.rapidapi.com/playlist/1963962142',
+        {
+            headers: {
+                'x-rapidapi-host': host,
+                'x-rapidapi-key': key,
             }
-        );
+        }
+    );
+
+    if (res.status === 200) {
         return res.data.tracks.data;
-    } catch (err) {
-        console.log(err);
     }
 }
-
