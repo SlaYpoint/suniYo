@@ -1,12 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Song.css";
 
 import { getTime } from "../../helpers/getTime";
+import { limitTitle } from "../../helpers/limitTitle";
 
 import { FaHeart, FaRegHeart, FaPlay, FaPause } from "react-icons/fa";
 
-const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef, liked, setLiked}) => {
+const toLocalStore = (data) => {
+  localStorage.setItem("likes", JSON.stringify(data));
+}
+
+const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef, likes, setLikes}) => {
     
+    const [liked, setLiked] = useState(false);
+
     const playHandler = () => {
         if (isPlaying) {
           audioRef.current.pause();
@@ -17,6 +24,30 @@ const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef, liked, setLiked}
         }
     }
 
+    const addToLikes = () => {
+      
+      const like = {
+        id: currentTrack.id,
+        title: limitTitle(currentTrack.title_short),
+        artist: currentTrack.artist.name,
+        cover : currentTrack.album.cover_small
+      }
+      setLikes([...likes, like]);
+      toLocalStore(likes);
+    }
+    
+    const likeToggler = () => {
+      if (!liked) {
+        addToLikes();
+        setLiked(true);
+      } else {
+        let newLikes = likes.filter(item => item.id !== currentTrack.id);
+        setLikes(newLikes);
+        toLocalStore(likes);
+        setLiked(false); 
+      }
+    }
+  
     return (
       <div className="song">
         <div className="song__card">
@@ -37,7 +68,7 @@ const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef, liked, setLiked}
                 {isPlaying ? <FaPause/> : <FaPlay/>}
             </button>
             <div className="song__duration"> {getTime(currentTrack.duration)} min</div>
-            <button className="btn song__btn" onClick={() => setLiked(!liked)}>
+            <button className="btn song__btn" onClick={likeToggler}>
                 {liked? <FaHeart/> : <FaRegHeart/>}
             </button>   
         </div>
