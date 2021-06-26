@@ -32,4 +32,30 @@
     color: var(--color-grey-dark);
 }
 
+.likes{
+    display: flex;
+    position: relative;
+}
+
+.likes__btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.likes__dropdown{
+    position: absolute;
+    top: 5rem;
+    z-index: 10000;
+    padding: 1rem 0;
+    width: 30rem;
+    background: #fff;
+    transition: all .4s;
+}
+
+.likes__list{
+    list-style: none;
+    overflow: auto;
+    padding-inline-start: 0;
+}
 

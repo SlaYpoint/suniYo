@@ -1,0 +1,38 @@
+.liked{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    margin: 0.5rem 1rem;
+    background:var(--bg-color-light);
+}
+
+.liked:hover{
+    background: var(--bg-color-dark);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.liked__cover{
+ height: 5rem;
+ width: 5rem;
+}
+
+.liked__cover > img{
+    width: 100%;
+    border-radius: 2px;
+}
+
+.liked__details{
+    margin-left: 2rem;
+}
+
+.liked__title{
+    color:var(--color-secondary-dark);
+    font-size: 1.4rem;
+}
+
+.liked__artist{
+    color: var(--color-grey-dark);
+    font-size: 1.3rem;
+}
