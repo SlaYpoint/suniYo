@@ -79,11 +79,19 @@ function App() {
     } 
   }
 
-  const [liked, setLiked] = useState(false);
 
+  const [likes, setLikes] = useState([]);
+
+  if (localStorage.getItem('likes') === null) {
+    setLikes([]);
+  } else {
+    setLikes(JSON.parse(localStorage.getItem('likes')));
+  }
+
+  
   return (
     <>
-      <Header searchSubmitHandler={searchSubmitHandler} />
+      <Header searchSubmitHandler={searchSubmitHandler} likes={likes}/>
       <main>
         <TrackList
           loading={loading}
@@ -99,8 +107,8 @@ function App() {
               isPlaying={isPlaying}
               setIsPlaying={setIsPlaying}
               audioRef={audioRef}
-              liked={liked}
-              setLiked={setLiked}
+              likes={likes}
+              setLikes={setLikes}
             />
           </div>
           <div className="audio__container">
