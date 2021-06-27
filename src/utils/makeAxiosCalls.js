@@ -39,3 +39,23 @@ export async function getPlaylist() {
         return res.data.tracks.data;
     }
 }
+
+
+export async function getSong(id) {
+    const host = "deezerdevs-deezer.p.rapidapi.com";
+    const key = process.env.REACT_APP_API_KEY;
+
+    const res = await axios.get(
+      `https://deezerdevs-deezer.p.rapidapi.com/track/${id}`,
+      {
+        headers: {
+          "x-rapidapi-host": host,
+          "x-rapidapi-key": key,
+        },
+      }
+    );
+
+    if (res.status === 200) {
+      return res.data;
+    }
+}
