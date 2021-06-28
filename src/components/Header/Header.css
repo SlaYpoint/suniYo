@@ -37,6 +37,10 @@
     position: relative;
 }
 
+.likes:hover{
+    transform: scale(1.1);
+}
+
 .likes__btn{
     display: flex;
     align-items: center;
@@ -51,6 +55,13 @@
     width: 30rem;
     background: #fff;
     transition: all .4s;
+    visibility: hidden;
+    opacity: 0;
+} 
+
+.likes__dropdown:hover, .likes__btn:hover + .likes__dropdown{
+    visibility: visible;
+    opacity: 1;
 }
 
 .likes__list{
@@ -59,3 +70,11 @@
     padding-inline-start: 0;
 }
 
+.likes-nolike{
+    font-size: 1rem;
+    display: block;
+}
+
+.likes-nolike__msg{
+    text-align: center;
+}
