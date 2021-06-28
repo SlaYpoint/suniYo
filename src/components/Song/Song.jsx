@@ -2,16 +2,12 @@ import React, {useState} from "react";
 import "./Song.css";
 
 import { getTime } from "../../helpers/getTime";
-import { limitTitle } from "../../helpers/limitTitle";
-
 import { FaHeart, FaRegHeart, FaPlay, FaPause } from "react-icons/fa";
 
-const toLocalStore = (data) => {
-  localStorage.setItem("likes", JSON.stringify(data));
-}
-
-const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef, likes, setLikes}) => {
+const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef}) => {
     
+    // const likedSong = likes.filter((item)=> item.id === currentTrack.id);
+
     const [liked, setLiked] = useState(false);
 
     const playHandler = () => {
@@ -24,30 +20,23 @@ const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef, likes, setLikes}
         }
     }
 
-    const addToLikes = () => {
+    // const addToLikes = () => {
       
-      const like = {
-        id: currentTrack.id,
-        title: limitTitle(currentTrack.title_short),
-        artist: currentTrack.artist.name,
-        cover : currentTrack.album.cover_small
-      }
-      setLikes([...likes, like]);
-      toLocalStore(likes);
-    }
+    //   const like = {
+    //     id: currentTrack.id,
+    //     title: limitTitle(currentTrack.title_short),
+    //     artist: currentTrack.artist.name,
+    //     cover: currentTrack.album.cover_small,
+    //     isLiked : true
+    //   }
+    //   setLiked(true);
+    //   setLikes([...likes, like]);
+    // }
     
     const likeToggler = () => {
-      if (!liked) {
-        addToLikes();
-        setLiked(true);
-      } else {
-        let newLikes = likes.filter(item => item.id !== currentTrack.id);
-        setLikes(newLikes);
-        toLocalStore(likes);
-        setLiked(false); 
-      }
+      liked ? setLiked(false) : setLiked(true);
     }
-  
+
     return (
       <div className="song">
         <div className="song__card">

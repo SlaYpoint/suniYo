@@ -40,13 +40,11 @@ function App() {
     fetchDefaultTracks()
   },[]);
 
-
   const timeUpdateHandler = (e) => {
     const currentTime = e.target.currentTime;
     const duration = e.target.duration;
     setTrackInfo({ ...trackInfo, currentTime, duration });
   };
-
 
   const trackHandler = async () => {
     const currentIndex = tracks.findIndex(
@@ -59,8 +57,7 @@ function App() {
       audioRef.current.play();
     }
   };
-
-  
+ 
   const searchSubmitHandler = async (event, query) => {
     event.preventDefault();
 
@@ -79,19 +76,33 @@ function App() {
     } 
   }
 
+  // const [likes, setLikes] = useState([]);
 
-  const [likes, setLikes] = useState([]);
+  // if (localStorage.getItem('likes') === null) {
+  //   setLikes([]);
+  // } else {
+  //   setLikes(JSON.parse(localStorage.getItem('likes')));
+  // }
 
-  if (localStorage.getItem('likes') === null) {
-    setLikes([]);
-  } else {
-    setLikes(JSON.parse(localStorage.getItem('likes')));
-  }
-
+  // const playLiked = async (id) => {
+  //   setLoading(true);
+  //   console.log('clicked');
+  //   try {
+  //     let likedSong = await getSong(id);
+  //     console.log(likedSong);
+  //     setCurrentTrack(likedSong);
+  //     setLoading(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //     setLoading(false);
+  //   }
+  // }
   
   return (
     <>
-      <Header searchSubmitHandler={searchSubmitHandler} likes={likes}/>
+      <Header
+        searchSubmitHandler={searchSubmitHandler}
+      />
       <main>
         <TrackList
           loading={loading}
@@ -106,10 +117,7 @@ function App() {
               currentTrack={currentTrack}
               isPlaying={isPlaying}
               setIsPlaying={setIsPlaying}
-              audioRef={audioRef}
-              likes={likes}
-              setLikes={setLikes}
-            />
+              audioRef={audioRef}/>
           </div>
           <div className="audio__container">
             <Player

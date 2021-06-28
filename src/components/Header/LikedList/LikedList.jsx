@@ -2,10 +2,10 @@ import React from "react";
 
 import "./LikedList.css";
 
-const LikedList = ({liked}) => {
+const LikedList = ({liked, playLiked}) => {
 
     return (
-      <li className="liked" key={liked.id}>
+      <li className="liked" key={liked.id} onClick={()=> playLiked(liked.id)}>
         <figure className="liked__cover">
           <img
             src={liked.cover}

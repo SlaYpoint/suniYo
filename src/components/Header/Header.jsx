@@ -2,11 +2,10 @@ import React, {useState} from "react";
 import { FaSearch, FaHeart } from "react-icons/fa";
 
 import "./Header.css";
-import LikedList from "./LikedList";
 
-const Header = ({searchSubmitHandler, likes}) => {
+const Header = ({searchSubmitHandler}) => {
     const [value, setValue] = useState('');
-
+  
     return (
       <header className="header">
         <img src="" alt="Logo" className="header-logo" />
@@ -30,22 +29,9 @@ const Header = ({searchSubmitHandler, likes}) => {
         </form>
 
         <div className="likes">
-          <button className="btn likes__btn">
+          <button className="btn likes__btn" >
             <FaHeart />
-          </button>
-          <div className="likes__dropdown">
-            <ul className="likes__list">
-              {likes.length === 0 ? (
-                <li className="error">
-                  <h2 className="error__msg">
-                    No liked songs 
-                  </h2>
-                </li>
-              ) : (
-                  likes.map((liked) => <LikedList liked={liked}/>)
-              )}
-            </ul>
-          </div>
+          </button> 
         </div>
       </header>
     );
