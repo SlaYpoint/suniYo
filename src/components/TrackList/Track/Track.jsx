@@ -1,7 +1,10 @@
 import React from "react";
-import {limitTitle} from "../../../helpers/limitTitle";
+import { useGlobalContext } from "../../../contexts/globalContext";
 
-const Track = ({ track, setCurrentTrack, isPlaying, audioRef}) => {
+import { limitTitle } from "../../../helpers/index";
+
+const Track = ({ track }) => {
+    const { setCurrentTrack, isPlaying, audioRef } = useGlobalContext();
     
     const trackSelectHandler = () => {
         setCurrentTrack(track);

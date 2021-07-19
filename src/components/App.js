@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import { useGlobalContext } from "../contexts/globalContext";
 
-import data from "../helpers/data";
+import "./App.css";
 import Player from "./Player/Player";
 import TrackList from "./TrackList/TrackList";
 import Header from "./Header/Header";
@@ -9,14 +9,11 @@ import Song from "./Song/Song";
 
 import { getPlaylist, getResults } from '../utils/makeAxiosCalls';
 
-
 function App() {
-  const audioRef = useRef(null);
+  const { audioRef, tracks, setTracks, currentTrack, setCurrentTrack, isPlaying} = useGlobalContext();
 
   const [loading, setLoading] = useState(false);
-  const [tracks, setTracks] = useState([]);
-  const [currentTrack, setCurrentTrack] = useState(data[0]);
-  const [isPlaying, setIsPlaying] = useState(false);
+
   const [trackInfo, setTrackInfo] = useState({
     currentTime: 0,
     duration: 0,
@@ -36,8 +33,9 @@ function App() {
         console.log(err);
       }
       
-    }
+    } 
     fetchDefaultTracks()
+    // eslint-disable-next-line
   },[]);
 
   const timeUpdateHandler = (e) => {
@@ -106,29 +104,15 @@ function App() {
       <main>
         <TrackList
           loading={loading}
-          tracks={tracks}
-          setCurrentTrack={setCurrentTrack}
-          audioRef={audioRef}
-          isPlaying={isPlaying}
         />
         <section className="music__container">
           <div className="song__container">
-            <Song
-              currentTrack={currentTrack}
-              isPlaying={isPlaying}
-              setIsPlaying={setIsPlaying}
-              audioRef={audioRef}/>
+            <Song/>
           </div>
           <div className="audio__container">
             <Player
-              isPlaying={isPlaying}
-              setIsPlaying={setIsPlaying}
-              currentTrack={currentTrack}
-              setCurrentTrack={setCurrentTrack}
-              audioRef={audioRef}
               trackInfo={trackInfo}
               setTrackInfo={setTrackInfo}
-              tracks={tracks}
             />
             <audio
               onLoadedMetadata={timeUpdateHandler}

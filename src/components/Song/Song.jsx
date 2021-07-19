@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useGlobalContext } from "../../contexts/globalContext";
+
 import "./Song.css";
-
-import { getTime } from "../../helpers/getTime";
 import { FaHeart, FaRegHeart, FaPlay, FaPause } from "react-icons/fa";
+import { getTime } from "../../helpers/index";
 
-const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef}) => {
-    
+const Song = () => {
+    const { currentTrack, isPlaying, playSong, pauseSong, audioRef} = useGlobalContext();
     // const likedSong = likes.filter((item)=> item.id === currentTrack.id);
 
     const [liked, setLiked] = useState(false);
@@ -13,10 +14,10 @@ const Song = ({currentTrack, isPlaying, setIsPlaying, audioRef}) => {
     const playHandler = () => {
         if (isPlaying) {
           audioRef.current.pause();
-          setIsPlaying(!isPlaying);
+          pauseSong();
         } else {
           audioRef.current.play();
-          setIsPlaying(!isPlaying);
+          playSong();
         }
     }
 

@@ -1,29 +1,25 @@
 import React from "react";
-import "./Player.css";
+import { useGlobalContext } from "../../contexts/globalContext";
 
-import { limitTitle } from "../../helpers/limitTitle";
-import { getTime } from "../../helpers/getTime";
+import "./Player.css";
 import { FaPlay, FaPause, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
+import { limitTitle, getTime } from "../../helpers/index";
+
 const Player = ({
-    isPlaying,
-    setIsPlaying,
-    currentTrack,
-    setCurrentTrack,
-    audioRef,
     trackInfo,
-    setTrackInfo,
-    tracks
+    setTrackInfo
 }) => {
+    const { tracks, currentTrack, setCurrentTrack, isPlaying, playSong, pauseSong, audioRef} = useGlobalContext();
 
     const playHandler = () => {
-        if (isPlaying) {
-            audioRef.current.pause();
-            setIsPlaying(!isPlaying);
-        } else {
-            audioRef.current.play();
-            setIsPlaying(!isPlaying);
-        }
+      if (isPlaying) {
+        audioRef.current.pause();
+        pauseSong();
+      } else {
+        audioRef.current.play();
+        playSong();
+      }
     }
 
     const dragHandler = (e) =>{

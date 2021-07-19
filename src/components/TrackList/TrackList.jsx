@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useGlobalContext } from "../../contexts/globalContext";
+
 import "./TrackList.css";
 import Pagination from "./Pagination/Pagination";
 import Track from "./Track/Track";
 import Preloader from "../Preloader/Preloader";
 
-const TrackList = ({loading, tracks, setCurrentTrack, audioRef, isPlaying}) => {
+const TrackList = ({ loading }) => {
+  const { tracks } = useGlobalContext();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [tracksPerPage] = useState(5);
 
@@ -21,7 +25,7 @@ const TrackList = ({loading, tracks, setCurrentTrack, audioRef, isPlaying}) => {
       </div>
     );
   }
-  
+ 
   return (
     <div className="track__container">
       <ul className="track__list">
@@ -38,9 +42,6 @@ const TrackList = ({loading, tracks, setCurrentTrack, audioRef, isPlaying}) => {
             .map((track) => (
               <Track
                 track={track}
-                setCurrentTrack={setCurrentTrack}
-                isPlaying={isPlaying}
-                audioRef={audioRef}
               />
             ))
         )}
