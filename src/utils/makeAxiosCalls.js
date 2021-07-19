@@ -4,10 +4,9 @@ export async function getResults(query) {
     const host = "deezerdevs-deezer.p.rapidapi.com";
     const key = process.env.REACT_APP_API_KEY;
 
-    const res = await axios(
+    const res = await axios.get(
         `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
         {
-            method: 'GET',
             headers: {
                 'x-rapidapi-host': host,
                 'x-rapidapi-key': key,
