@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 4rem;
+    padding: 2rem 4rem;
     background: var(--bg-color-light);
     font-size: 1.6rem;
 }
@@ -17,7 +17,7 @@
 .search{
     position: relative;
     display: flex;
-    flex: 0 0 30%;
+    flex: 0 0 40%;
     justify-content: center;
     align-items: center;
 }
@@ -29,6 +29,7 @@
     border-radius: 5px;
     outline: none;
     font-size: 1.2rem;
+    margin-right: 1rem;
     color: var(--color-grey-dark);
 }
 
@@ -77,4 +78,25 @@
 
 .likes-nolike__msg{
     text-align: center;
+}
+
+/* Media queries */
+@media (max-width : 700px){
+    .header{
+        flex-wrap: wrap;
+        align-content: center;
+        height: 14rem;
+        padding: 5rem 3rem;
+    }
+    .search{
+        order: 1;
+        margin: 0 auto;
+        margin-top: 1rem;
+        align-self: start;
+    }
+
+    .likes{
+        flex: 0 0 50%;
+        justify-content: flex-start;
+    }
 }

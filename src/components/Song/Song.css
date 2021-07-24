@@ -8,7 +8,7 @@
 }
 
 .song__details{
-    padding: 1rem;
+    padding: 1rem 2rem;
     color: var(--color-grey-dark);
 }
 
@@ -24,11 +24,11 @@
 
 .song__title{
     color: var(--color-primary-dark);
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 .song__artist{
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 
 .song__sub-details{
@@ -38,8 +38,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 2px solid var(--bg-color-dark);
-    border-radius: 3rem;
+    border: 3px solid var(--bg-color-dark);
+    border-radius: 1rem;
     color: var(--color-grey-dark);
 }
 
@@ -50,4 +50,11 @@
 .song__btn{
     padding: 0.5rem  0.8rem;
     border-radius: 50%;
+}
+
+/* Media queries */
+@media (max-width: 700px){
+    .song{
+        flex: 0 0 30%;
+    }
 }
