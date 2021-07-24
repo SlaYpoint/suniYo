@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
 :root{
-  --color-primary:#3B82F6;
-  --color-primary-dark:#1E40AF;
-  --color-secondary:#BFDBFE;
-  --color-secondary-dark:#60A5FA;
-  --bg-color-light: #DBEAFE;
-  --bg-color-dark:#BFDBFE;
+  --color-primary:#EEF2FF;
+  --color-primary-dark:#3730A3;
+  --color-secondary:#A5B4FC;
+  --color-secondary-dark:#818CF8;
+  --bg-color-light: #E0E7FF;
+  --bg-color-dark:#C7D2FE;
   --color-grey-light:#D1D5DB;
   --color-grey-dark:#6B7280;
 }
@@ -24,11 +24,28 @@
 
 body {
   margin: 0;
-  font-family: "Ubuntu", sans-serif;
+  height: 100%;
+  font-family: 'Inter', 
+  sans-serif;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+@media (max-width : 700px){
+
+  html{
+    height: 100vh;
+  }
+
+  body{
+    height : auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width : 900px){
+  html{
+    font-size: 50%;
+  }
+}

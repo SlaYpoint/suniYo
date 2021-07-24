@@ -14,7 +14,7 @@ main{
     font-size: 1.4rem;
     background: linear-gradient(
         90deg,
-        var(--color-secondary-dark),
+        var(--color-secondary),
         var(--color-primary-dark)
     );
     color: #fff;
@@ -60,4 +60,26 @@ main{
     z-index: 1000;
     background: transparent;
     box-shadow: 0px 0px 20px 0px #e3dddd;
+    border-top-right-radius: 5.5rem;
+    border-top-left-radius: 2rem;
 }
+
+/* Media queries */
+@media (max-width : 700px){
+    main{
+        min-height: 90vh;
+    }
+
+    .music__container{
+        padding-bottom: 30%;
+    }
+
+    .song__container{
+        flex-direction: column;
+    }
+
+    .audio__container{
+        width: 100%;
+    }
+}
+
