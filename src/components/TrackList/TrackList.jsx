@@ -7,7 +7,7 @@ import Track from "./Track/Track";
 import Preloader from "../Preloader/Preloader";
 
 const TrackList = ({ loading }) => {
-  const { tracks } = useGlobalContext();
+  const { tracks, transform } = useGlobalContext();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [tracksPerPage] = useState(5);
@@ -27,7 +27,7 @@ const TrackList = ({ loading }) => {
   }
  
   return (
-    <div className="track__container">
+    <div className={transform ? "track__container track__container-transform" : "track__container"}>
       <ul className="track__list">
         {tracks.length === 0 ? (
           <li className="error">
@@ -37,13 +37,7 @@ const TrackList = ({ loading }) => {
             </h2>
           </li>
         ) : (
-          tracks
-            .slice(startIdx, endIdx)
-            .map((track) => (
-              <Track
-                track={track}
-              />
-            ))
+          tracks.slice(startIdx, endIdx).map((track) => <Track track={track} />)
         )}
       </ul>
       <Pagination

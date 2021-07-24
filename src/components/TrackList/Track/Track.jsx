@@ -4,10 +4,11 @@ import { useGlobalContext } from "../../../contexts/globalContext";
 import { limitTitle } from "../../../helpers/index";
 
 const Track = ({ track }) => {
-    const { setCurrentTrack, isPlaying, audioRef } = useGlobalContext();
+    const { setCurrentTrack, isPlaying, audioRef, setTransform } = useGlobalContext();
     
     const trackSelectHandler = () => {
         setCurrentTrack(track);
+        setTransform(false);
 
         if (isPlaying) {
             audioRef.current.play();

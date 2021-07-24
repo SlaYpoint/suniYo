@@ -18,7 +18,7 @@
     justify-content: flex-start;
     align-items: center;
     padding: 0.5rem 2rem;
-    margin: 0.5rem 1rem;
+    margin: 0.5rem 1.5rem;
     background:var(--bg-color-light);
 }
 
@@ -43,11 +43,38 @@
 }
 
 .track__title{
-    color:var(--color-secondary-dark);
+    color:var(--color-primary-dark);
     font-size: 1.4rem;
 }
 
 .track__artist{
     color: var(--color-grey-dark);
     font-size: 1.3rem;
+}
+
+/* Media queries */
+@media (max-width : 700px){
+    .track__container{
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 9999;
+        overflow-y: hidden;
+        transform: translate(100%);
+    }
+
+    .track__container-transform{
+        transform: translate(0%);
+    }
+
+    .track__list{
+        overflow: none;
+    }
+
+    .track{
+        padding: 1rem 2rem;
+        margin: 3% 1.5rem;
+    }
 }
