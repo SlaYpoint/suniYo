@@ -2,13 +2,14 @@ import React, {useState} from "react";
 import { FaSearch, FaHeart } from "react-icons/fa";
 
 import "./Header.css";
+import logo from "../assets/logo.png";
 
 const Header = ({searchSubmitHandler}) => {
     const [value, setValue] = useState('');
   
     return (
       <header className="header">
-        <img src="" alt="Logo" className="header-logo" />
+        <img src={logo} alt="suniyo" className="header-logo" />
 
         <form
           className="search"
