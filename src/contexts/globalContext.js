@@ -10,6 +10,7 @@ const AppProvider = ({ children }) => {
     const [tracks, setTracks] = useState([]);
     const [currentTrack, setCurrentTrack] = useState(data[0]);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [transform, setTransform] = useState(false);
 
     const playSong = () => setIsPlaying(true);
 
@@ -26,7 +27,9 @@ const AppProvider = ({ children }) => {
                 isPlaying,
                 playSong,
                 pauseSong,
-                audioRef
+                audioRef,
+                transform,
+                setTransform
             }}
         >
             {children}
