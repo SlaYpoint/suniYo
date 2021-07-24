@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "../contexts/globalContext";
 
 import "./App.css";
+import Preloader from "./Preloader/Preloader";
 import Player from "./Player/Player";
 import TrackList from "./TrackList/TrackList";
 import Header from "./Header/Header";
@@ -10,9 +11,10 @@ import Song from "./Song/Song";
 import { getPlaylist, getResults } from '../utils/makeAxiosCalls';
 
 function App() {
-  const { audioRef, tracks, setTracks, currentTrack, setCurrentTrack, isPlaying} = useGlobalContext();
+  const { audioRef, tracks, setTracks, currentTrack, setCurrentTrack, isPlaying, setTransform} = useGlobalContext();
 
   const [loading, setLoading] = useState(false);
+  const [siteLoader, setSiteLoader] = useState(false);
 
   const [trackInfo, setTrackInfo] = useState({
     currentTime: 0,
@@ -22,14 +24,14 @@ function App() {
   useEffect(() => {
     const fetchDefaultTracks = async () => {
 
-      setLoading(true);
+      setSiteLoader(true);
       try {
         let playlist = await getPlaylist();
         setTracks(playlist);
-        setLoading(false);
+        setSiteLoader(false);
         setCurrentTrack(playlist[0]);
       } catch (err) {
-        setLoading(false);
+        setSiteLoader(false);
         console.log(err);
       }
       
@@ -59,6 +61,7 @@ function App() {
   const searchSubmitHandler = async (event, query) => {
     event.preventDefault();
 
+    setTransform(true);
     setLoading(true);
     if (query !== ' ' && query !== null && typeof(query) !== undefined) {
       
@@ -95,7 +98,13 @@ function App() {
   //     setLoading(false);
   //   }
   // }
-  
+  if (siteLoader) {
+    return (
+      <>
+        <Preloader />
+      </>
+    );
+  }
   return (
     <>
       <Header
