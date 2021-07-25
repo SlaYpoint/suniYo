@@ -11,7 +11,7 @@ Wanna find the latest music and listen to your favourite songs ? Catch them all 
     <img src="demo.gif" alt="suniyo">
 </p>
 
-## Quick Setup :heavy_check_mark :
+## Quick Setup :heavy_check_mark:
 
 1. Clone [this](https://github.com/SlaYpoint/suniYo) repo.
 
