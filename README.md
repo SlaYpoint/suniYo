@@ -4,11 +4,11 @@
     <br>
 </p>
 
-Wanna find the latest music and listen to your favourite songs ? Catch them all on *Suniyo*.
+Wanna find the latest music and listen to your favourite songs ? Catch them all on *Suniyo*. A React-only single page application to search and stream music. 
 
 ## Demo
 <p align="center">
-    <img src="" alt="suniyo">
+    <img src="demo.gif" alt="suniyo">
 </p>
 
 ## Quick Setup :heavy_check_mark :
